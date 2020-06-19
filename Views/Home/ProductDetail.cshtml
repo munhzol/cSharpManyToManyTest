@@ -1,0 +1,61 @@
+@{
+    ViewData["Title"] = "Product Detail Page";
+}
+
+<partial name="_Navigations"/>
+
+<div class="alert alert-info my-5">
+    Product Detail Page
+</div>
+
+<h2 class="my-3">
+    @ViewBag.Product.Name
+</h2>
+
+<div class="row">
+    <div class="col-sm-4">
+
+        <h4>
+            Add a Category
+        </h4>
+
+        <form action="/products/add/category" method="POST">
+
+            <div class="form-group">
+
+                <select class="form-control" name="categoryID">
+                    <option value=""> </option>
+                    @foreach (Category c in @ViewBag.Categories)
+                    {
+  
+                        <option value="@c.CategoryID">@c.Name</option>
+                    }
+                </select>
+            </div>
+            <input type="hidden" name="productID" value="@ViewBag.pid"/>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+
+    </div>
+    <div class="col-sm-8">
+
+        <h4>
+            Categories
+        </h4>
+
+        <table class="table table-hover">
+            <tr>
+                <th>Name</th>
+            </tr>
+
+            @foreach (var item in @ViewBag.Product.Categories)
+                {   
+                    <tr>
+                        <td>@item.AddedCategory.Name</td>
+                    </tr>
+                }
+
+        </table>
+
+    </div>
+</div>
